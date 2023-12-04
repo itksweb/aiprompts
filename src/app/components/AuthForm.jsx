@@ -17,7 +17,7 @@ export default function AuthForm() {
 
   useLayoutEffect(() => {
     pathname === "/register" ? setIsLogin(false) : setIsLogin(true);
-  }, []);
+  }, [pathname]);
 
   const loginUser = async (payload) => {
     signIn("credentials", { ...payload, redirect: false })
