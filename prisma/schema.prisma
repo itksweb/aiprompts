@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id    String    @id @default(uuid())
+  name String?
+  email String? @unique 
+  emailVerified DateTime?
+  image String?
+  hash  String? 
+  createdAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+
+  accounts Account[]
+  prompts Prompt[]
+}
+model Prompt {
+  id      String      @id @default(uuid())
+  userId String
+  prompt String
+  tag String
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Account {
+  id      String      @id @default(uuid())
+  userId String 
+  type String
+  provider String
+  providerAccountId String
+  refresh_token String?
+  access_token String?
+  expires_at Int?
+  token_type String?
+  scope String?
+  id_token String?
+  session_state String?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerAccountId])
+
+}
+
+model users {
+  id      String      @id @default(uuid())
+  name    String?   
+  email   String   @unique 
+  emailVerified DateTime?
+  image String?
+  hash  String? 
+  createdAt DateTime @default(now())
+  updateAt DateTime @updatedAt 
+}
