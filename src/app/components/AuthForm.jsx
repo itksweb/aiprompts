@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
+import { api } from "../lib/libs";
 
 export default function AuthForm() {
   const router = useRouter();
@@ -30,7 +31,7 @@ export default function AuthForm() {
       body: JSON.stringify(payload),
       headers: { "Content-Type": "application/json" },
     };
-    fetch("/api/register", reqOpt)
+    fetch(`${api}/register`, reqOpt)
       .then((res) => res.json())
       .then((user) => console.log(user));
 

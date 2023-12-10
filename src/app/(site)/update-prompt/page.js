@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import PromptForm from "@src/app/components/PromptForm";
+import { api } from "@src/app/lib/libs";
 
 const UpdatePrompt = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -16,7 +17,7 @@ const UpdatePrompt = () => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const res = await fetch(`/api/prompt/${promptId}`);
+      const res = await fetch(`${api}/prompt/${promptId}`);
       const data = await res.json();
       console.log(data);
       setPost(data);
@@ -29,7 +30,7 @@ const UpdatePrompt = () => {
     console.log(post);
     setSubmitting(true);
     try {
-      const res = await fetch(`/api/prompt/${promptId}`, {
+      const res = await fetch(`${api}/prompt/${promptId}`, {
         method: "PATCH",
         body: JSON.stringify({
           prompt: post.prompt,

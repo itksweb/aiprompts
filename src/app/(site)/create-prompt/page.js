@@ -3,8 +3,12 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import PromptForm from "@src/app/components/PromptForm";
+import { api } from "@src/app/lib/libs";
 
 const CreatePrompt = () => {
+  const yu = { yt: process.env.API };
+  console.log(yu.yt);
+  //console.log(process.env.API);
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({
     tag: "",
@@ -18,7 +22,7 @@ const CreatePrompt = () => {
     console.log(post);
     setSubmitting(true);
     try {
-      const res = await fetch("api/prompt/new", {
+      const res = await fetch(`${api}/prompt/new`, {
         method: "POST",
         body: JSON.stringify({
           prompt: post.prompt,

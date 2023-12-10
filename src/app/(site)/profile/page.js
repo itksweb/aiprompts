@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Profile from "@src/app/components/Profile";
+import { api } from "@src/app/lib/libs";
 
 const ProfilePage = () => {
   const { data: session } = useSession();
@@ -9,7 +10,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchUserPosts = async () => {
-      const res = await fetch(`/api/users/${session?.user.id}/posts`);
+      const res = await fetch(`${api}/users/${session?.user.id}/posts`);
       const data = await res.json();
       setPosts(data);
     };
