@@ -6,9 +6,6 @@ import PromptForm from "@src/app/components/PromptForm";
 import { api } from "@src/app/lib/libs";
 
 const CreatePrompt = () => {
-  const yu = { yt: process.env.API };
-  console.log(yu.yt);
-  //console.log(process.env.API);
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({
     tag: "",
